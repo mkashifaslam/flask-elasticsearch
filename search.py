@@ -8,10 +8,13 @@ from elasticsearch import Elasticsearch
 
 load_dotenv()
 
+ELASTIC_SEARCH_USER = os.getenv('ELASTIC_SEARCH_USER')
+ELASTIC_SEARCH_PASS = os.getenv('ELASTIC_SEARCH_PASS')
+
 
 class Search:
     def __init__(self):
-        self.es = Elasticsearch('http://localhost:9200', http_auth=("elastic", "elastic@2024"))
+        self.es = Elasticsearch('http://localhost:9200', http_auth=(ELASTIC_SEARCH_USER, ELASTIC_SEARCH_PASS))
         client_info = self.es.info()
         print('Connected to Elasticsearch!')
         pprint(client_info.body)
